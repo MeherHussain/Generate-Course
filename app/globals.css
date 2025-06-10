@@ -2,20 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+:root { /* Default background color is white */ /* Default foreground color is black */
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :root { /* Dark mode background color */ /* Dark mode foreground color */
   }
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer base {
+  :root {
+  --radius: 0.5rem;
+ }
 }
