@@ -33,7 +33,7 @@ function Page({ params }) {
   };
 
   return (
-    <div className="flex ">
+    <div className="flex mt-[100px] ">
       {/* Chapter list content */}
       <div className="w-64 hidden md:block h-screen">
         <ChapSidbar course={course} setChapters={setSelectedChapter} />

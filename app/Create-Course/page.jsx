@@ -195,69 +195,109 @@ function CreateCourse() {
   };
 
   return (
-    <div>
-      <div className="flex flex-col justify-center items-center mt-10">
-        <h2 className="text-4xl text-slate-900 font-bold">Create Course</h2>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+      {/* Header Section */}
+      <div className="flex flex-col justify-center items-center pt-[150px] pb-16">
+        <h2 className="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 bg-clip-text text-transparent drop-shadow-sm">
+          Create Course
+        </h2>
       </div>
-      <div className="flex justify-center items-center gap-[130px] mt-10">
+
+      {/* Stepper Section */}
+      <div className="flex justify-center items-center gap-8 sm:gap-[130px] mt-10 px-4">
         {StepperOptions.map((item, index) => (
-          <div key={item.id} className="flex flex-col items-center">
+          <div
+            key={item.id}
+            className="flex flex-col items-center relative group"
+          >
             <div
-              className={`flex justify-center items-center bg-gray-400 w-10 h-10 text-white rounded-full 
-            ${activeIndex >= index && "bg-slate-600"}`}
+              className={`flex justify-center items-center w-12 h-12 rounded-xl transition-all duration-500 transform group-hover:scale-110 ${
+                activeIndex >= index
+                  ? "bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 shadow-lg"
+                  : "bg-gray-200"
+              }`}
             >
-              {item.icon}
-            </div>
-            <div className="mt-3">
-              <h2 className="text-center font-bold">{item.name}</h2>
-            </div>
-            {index != StepperOptions?.length - 1 && (
-              <div
-                className={`h-1 w-[50px] md:w-[100px] lg:w-[170px] rounded-full bg-gray-300 relative left-[130px] bottom-[50px] ${
-                  activeIndex - 1 >= index ? "bg-slate-500" : ""
+              <span
+                className={`text-xl ${
+                  activeIndex >= index ? "text-white" : "text-gray-500"
                 }`}
-              ></div>
+              >
+                {item.icon}
+              </span>
+            </div>
+
+            <div className="mt-4">
+              <h2
+                className={`text-center font-bold transition-colors duration-300 ${
+                  activeIndex >= index ? "text-gray-800" : "text-gray-400"
+                }`}
+              >
+                {item.name}
+              </h2>
+            </div>
+
+            {index !== StepperOptions.length - 1 && (
+              <div
+                className={`hidden sm:block h-1 w-[170px] rounded-full transition-all duration-500 absolute top-6 left-[100px] ${
+                  activeIndex > index
+                    ? "bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"
+                    : "bg-gray-200"
+                }`}
+              />
             )}
           </div>
         ))}
       </div>
-      {activeIndex == 0 ? (
-        <Selcategory />
-      ) : activeIndex == 1 ? (
-        <TopicDescription
-          topicName={topicName}
-          setTopicName={setTopicName}
-          description={description}
-          setDescription={setDescription}
-        />
-      ) : (
-        <SelectOptions />
-      )}
-      <div className="flex justify-between p-10">
+
+      {/* Content Section */}
+      <div className="mt-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        {activeIndex === 0 ? (
+          <Selcategory />
+        ) : activeIndex === 1 ? (
+          <TopicDescription
+            topicName={topicName}
+            setTopicName={setTopicName}
+            description={description}
+            setDescription={setDescription}
+          />
+        ) : (
+          <SelectOptions />
+        )}
+      </div>
+
+      {/* Navigation Buttons */}
+      <div className="flex justify-between p-6 sm:p-10 max-w-7xl mx-auto">
         <button
-          className="bg-slate-400 w-[100px] h-[40px] rounded-full hover:scale-[1.1] hover:transition-all ease-in-out duration-75 hover:bg-slate-200"
-          disabled={activeIndex == 0}
+          className={`px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform 
+            ${
+              activeIndex === 0
+                ? "opacity-50 cursor-not-allowed bg-gray-200 text-gray-400"
+                : "bg-white text-gray-700 hover:scale-105 hover:shadow-lg border border-gray-200"
+            }`}
+          disabled={activeIndex === 0}
           onClick={() => setActiveIndex(activeIndex - 1)}
         >
           Previous
         </button>
-        {activeIndex < 2 && (
+
+        {activeIndex < 2 ? (
           <button
-            className="bg-slate-400 w-[100px] h-[40px] rounded-full hover:scale-[1.1] hover:transition-all ease-in-out duration-75 hover:bg-slate-200"
+            className="px-8 py-3 rounded-lg font-semibold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white hover:shadow-xl hover:scale-105 transition-all duration-300"
             onClick={() => setActiveIndex(activeIndex + 1)}
           >
             Next
           </button>
-        )}
-        {activeIndex == 2 && (
+        ) : (
           <button
-            className="bg-slate-400 w-[100px] h-[40px] rounded-full hover:scale-[1.1] hover:transition-all ease-in-out duration-75 hover:bg-slate-200"
+            className="px-8 py-3 rounded-lg font-semibold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white hover:shadow-xl hover:scale-105 transition-all duration-300 relative group"
             onClick={() => GenerateCourseLayout()}
           >
-            Create
+            <span className="relative z-10">Create</span>
+            <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </button>
         )}
       </div>
+
       <LoadingDialog loading={loading} />
     </div>
   );

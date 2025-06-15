@@ -3,6 +3,9 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  images: {
+    domains: ["excelrindia.b-cdn.net"],
+  },
 };
 
 export default nextConfig;

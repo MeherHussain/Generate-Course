@@ -2,20 +2,20 @@ import { SignIn } from "@clerk/nextjs";
 
 export default function Page() {
   return (
-    <section className="bg-white">
-      <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
-        <section className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
+    <section className="bg-gradient-to-br from-blue-900 via-blue-700 to-blue-400 min-h-screen flex items-center justify-center px-2 sm:px-4">
+      <div className="w-full max-w-6xl mx-auto rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row bg-white/90 backdrop-blur-lg">
+        {/* Left Side: Image & Welcome */}
+        <div className="relative hidden lg:flex flex-col justify-center items-center lg:w-1/2 bg-gradient-to-br from-blue-900 via-blue-700 to-blue-400 p-6 xl:p-12">
           <img
-            alt=""
+            alt="Sign In Visual"
             src="https://images.unsplash.com/photo-1617195737496-bc30194e3a19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-            className="absolute inset-0 h-full w-full object-cover opacity-80"
+            className="absolute inset-0 h-full w-full object-cover opacity-70"
           />
-
-          <div className="hidden lg:relative lg:block lg:p-12">
-            <a className="block text-white" href="#">
+          <div className="relative z-10 flex flex-col items-start">
+            <a className="block mb-6" href="#">
               <span className="sr-only">Home</span>
               <svg
-                className="h-8 sm:h-10"
+                className="h-10 w-10 text-white drop-shadow-lg"
                 viewBox="0 0 28 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -26,23 +26,24 @@ export default function Page() {
                 />
               </svg>
             </a>
-
-            <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
-              Welcome to Squid 🦑
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-2 drop-shadow-lg tracking-tight">
+              Welcome to{" "}
+              <span className="bg-gradient-to-r from-yellow-300 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+                AI Course Generator
+              </span>
             </h2>
-
-            <p className="mt-4 leading-relaxed text-white/90">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi
-              nam dolorum aliquam, quibusdam aperiam voluptatum.
+            <p className="text-base sm:text-lg text-white/90 font-medium mb-4 max-w-md">
+              Unlock your journey of learning with a modern, secure, and latest
+              AI platform.
             </p>
           </div>
-        </section>
-
-        <main className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
-          <div className="max-w-xl lg:max-w-3xl">
-            <div className="relative -mt-16 block lg:hidden">
+        </div>
+        {/* Right Side: Sign In Form */}
+        <main className="flex items-center justify-center px-2 py-6 sm:px-6 sm:py-10 lg:w-1/2 bg-white/80">
+          <div className="w-full max-w-xl mx-auto">
+            <div className="relative block lg:hidden mb-6 sm:mb-8 flex flex-col items-center">
               <a
-                className="inline-flex size-16 items-center justify-center rounded-full bg-white text-blue-600 sm:size-20"
+                className="inline-flex w-14 h-14 sm:w-16 sm:h-16 items-center justify-center rounded-full bg-gradient-to-br from-yellow-300 via-pink-400 to-blue-400 text-white shadow-lg"
                 href="#"
               >
                 <span className="sr-only">Home</span>
@@ -58,17 +59,20 @@ export default function Page() {
                   />
                 </svg>
               </a>
-
-              <h1 className="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
-                Welcome to Squid 🦑
+              <h1 className="mt-2 text-xl font-bold text-gray-900 sm:text-2xl md:text-4xl text-center">
+                Welcome to{" "}
+                <span className="bg-gradient-to-r from-yellow-300 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+                  AI Course Generator
+                </span>
               </h1>
-
-              <p className="mt-4 leading-relaxed text-gray-500">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Eligendi nam dolorum aliquam, quibusdam aperiam voluptatum.
+              <p className="mt-3 sm:mt-4 leading-relaxed text-gray-500 text-center text-sm sm:text-base">
+                Unlock your journey of learning with a modern, secure, and
+                latest AI Plateform.
               </p>
             </div>
-            <SignIn />
+            <div className="rounded-xl sm:rounded-2xl shadow-xl bg-white/90 p-4 sm:p-8">
+              <SignIn />
+            </div>
           </div>
         </main>
       </div>

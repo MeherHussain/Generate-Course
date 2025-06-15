@@ -5,8 +5,9 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../../../components/ui/select"; // Corrected import path
+} from "../../../components/ui/select";
 import { UserInputContext } from "../../_Context/UserInputContext";
+import { motion } from "framer-motion";
 
 function SelectOptions() {
   const [userCourseInput, setUserCourseInput] = useContext(UserInputContext);
@@ -18,92 +19,112 @@ function SelectOptions() {
     }));
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { staggerChildren: 0.1, delayChildren: 0.5 },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   return (
-    <div className="px-10 md:px-20 lg:px-40 mt-10">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-        <div className="flex flex-col">
-          <label className="font-bold text-lg mb-2">Difficulty Level</label>
-          <Select
-            value={userCourseInput?.level || ""}
-            onValueChange={(value) => handleInputChange("level", value)}
+    <motion.div
+      className="px-4 sm:px-6 md:px-8 lg:px-12 mt-6 sm:mt-10 max-w-4xl mx-auto"
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+    >
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+        {[
+          {
+            label: "Difficulty Level",
+            field: "level",
+            type: "select",
+            options: [
+              { value: "beginner", label: "Beginner" },
+              { value: "intermediate", label: "Intermediate" },
+              { value: "advanced", label: "Advanced" },
+            ],
+          },
+          {
+            label: "Course Duration",
+            field: "Duration",
+            type: "select",
+            options: [
+              { value: "1 Hours", label: "1 Hour" },
+              { value: "2 Hours", label: "2 Hours" },
+              { value: "More than 3 Hours", label: "More than 3 Hours" },
+            ],
+          },
+          {
+            label: "Add Video",
+            field: "DisplayVideo",
+            type: "select",
+            options: [
+              { value: "Yes", label: "Yes" },
+              { value: "No", label: "No" },
+            ],
+          },
+          {
+            label: "No of Chapters",
+            field: "Chapters",
+            type: "input",
+          },
+        ].map((field, index) => (
+          <motion.div
+            key={field.field}
+            className="relative group"
+            variants={itemVariants}
           >
-            <SelectTrigger className="w-full p-3 bg-white border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-              <SelectValue placeholder="Select" />
-            </SelectTrigger>
-            <SelectContent className="bg-white border border-gray-300 rounded-lg shadow-lg mt-2">
-              <SelectItem value="beginner" className="p-3 hover:bg-gray-100">
-                Beginner
-              </SelectItem>
-              <SelectItem
-                value="intermediate"
-                className="p-3 hover:bg-gray-100"
-              >
-                Intermediate
-              </SelectItem>
-              <SelectItem value="advanced" className="p-3 hover:bg-gray-100">
-                Advanced
-              </SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-        <div className="flex flex-col">
-          <label className="font-bold text-lg mb-2">Course Duration</label>
-          <Select
-            value={userCourseInput?.Duration || ""}
-            onValueChange={(value) => handleInputChange("Duration", value)}
-          >
-            <SelectTrigger className="w-full p-3 bg-white border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-              <SelectValue placeholder="Select" />
-            </SelectTrigger>
-            <SelectContent className="bg-white border border-gray-300 rounded-lg shadow-lg mt-2">
-              <SelectItem value="1 Hours" className="p-3 hover:bg-gray-100">
-                1 Hour
-              </SelectItem>
-              <SelectItem value="2 Hours" className="p-3 hover:bg-gray-100">
-                2 Hours
-              </SelectItem>
-              <SelectItem
-                value="More than 3 Hours"
-                className="p-3 hover:bg-gray-100"
-              >
-                More than 3 Hours
-              </SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-        <div className="flex flex-col">
-          <label className="font-bold text-lg mb-2">Add Video</label>
-          <Select
-            value={userCourseInput?.DisplayVideo || ""}
-            onValueChange={(value) => handleInputChange("DisplayVideo", value)}
-          >
-            <SelectTrigger className="w-full p-3 bg-white border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-              <SelectValue placeholder="Select" />
-            </SelectTrigger>
-            <SelectContent className="bg-white border border-gray-300 rounded-lg shadow-lg mt-2">
-              <SelectItem value="Yes" className="p-3 hover:bg-gray-100">
-                Yes
-              </SelectItem>
-              <SelectItem value="No" className="p-3 hover:bg-gray-100">
-                No
-              </SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-        <div className="flex flex-col">
-          <label className="font-bold text-lg mb-2">No of Chapters</label>
-          <input
-            type="text"
-            placeholder="How many Chapters"
-            className="w-full p-3 bg-white border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            value={userCourseInput?.Chapters || ""}
-            onChange={(event) =>
-              handleInputChange("Chapters", event.target.value)
-            }
-          />
-        </div>
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg -z-10 group-hover:blur-sm transition-all duration-300" />
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-blue-100/50 shadow-lg hover:shadow-xl transition-all duration-300">
+              <label className="block font-bold text-base sm:text-lg mb-3 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                {field.label}
+              </label>
+              {field.type === "select" ? (
+                <Select
+                  value={userCourseInput?.[field.field] || ""}
+                  onValueChange={(value) =>
+                    handleInputChange(field.field, value)
+                  }
+                >
+                  <SelectTrigger className="w-full p-3 bg-white/70 border border-blue-100 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300">
+                    <SelectValue placeholder="Select option..." />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white/95 backdrop-blur-md border border-blue-100 rounded-lg shadow-xl">
+                    {field.options.map((option) => (
+                      <SelectItem
+                        key={option.value}
+                        value={option.value}
+                        className="p-3 hover:bg-blue-50/50 transition-colors duration-200"
+                      >
+                        {option.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              ) : (
+                <input
+                  type="text"
+                  placeholder="Enter number of chapters"
+                  className="w-full p-3 bg-white/70 border border-blue-100 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300"
+                  value={userCourseInput?.[field.field] || ""}
+                  onChange={(e) =>
+                    handleInputChange(field.field, e.target.value)
+                  }
+                />
+              )}
+            </div>
+          </motion.div>
+        ))}
       </div>
-    </div>
+    </motion.div>
   );
 }
 

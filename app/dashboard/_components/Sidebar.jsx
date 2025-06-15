@@ -67,3 +67,7 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+// import HomeIcon from "../dashboard/_components/Home.jsx";
+// import ExploreIcon from "../dashboard/_components/Explore.jsx";
+// import UpgradeIcon from "../dashboard/_components/Upgrade.jsx";
+// import LogoutIcon from "../dashboard/_components/Logout.jsx";

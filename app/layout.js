@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono, Outfit } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider, GoogleOneTap } from "@clerk/nextjs";
+import Footer from "./Footer"
 
 const geistSans = Outfit({
   variable: "--font-geist-sans",
@@ -26,6 +27,7 @@ export default function RootLayout({ children }) {
         <ClerkProvider>
           {/* <GoogleOneTap/> */}
           {children}
+          <Footer/>
         </ClerkProvider>
       </body>
     </html>

@@ -10,7 +10,7 @@ const Input = ({ value, onChange }) => {
         className="input"
         placeholder="Topic Here!"
         value={value}
-        onChange={onChange} // Correctly pass the event to the onChange handler
+        onChange={onChange}
       />
     </StyledWrapper>
   );
@@ -18,8 +18,8 @@ const Input = ({ value, onChange }) => {
 
 const StyledWrapper = styled.div`
   display: flex;
-  justify-content: center; /* Center the input field */
-  width: 800px; /* Ensure the wrapper takes the full width */
+  justify-content: center;
+  width: 100%;
 
   .input {
     border: none;
@@ -29,13 +29,27 @@ const StyledWrapper = styled.div`
     box-shadow: 6px 6px 12px #ffffff, -6px -6px 12px #c5c5c5;
     font-size: medium;
     font-weight: bold;
-    max-width: 100%; /* Ensure the input takes the full width of the container */
-    width: 100%; /* Ensure the input takes the full width of the container */
+    width: 800px; /* Keep full width on large screens */
+    max-width: 100%; /* Prevent overflow on small screens */
   }
 
   .input:focus {
     outline-color: white;
-    place-content: "Enter your message!";
+  }
+
+  @media (max-width: 768px) {
+    .input {
+      width: 100%; /* Auto shrink on mobile */
+      font-size: 0.95rem;
+      padding: 12px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .input {
+      font-size: 0.9rem;
+      padding: 10px;
+    }
   }
 `;
 
